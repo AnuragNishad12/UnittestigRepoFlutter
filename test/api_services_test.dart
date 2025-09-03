@@ -15,22 +15,25 @@ void main() {
     apiServices = ApiServices(client: mockHttpClient);
   });
 
-  test('✅ fetchRandomDog returns DogModel when API call is successful', () async {
-    const fakeJson =
-        '{"message": "https://images.dog.ceo/breeds/hound.jpg", "status": "success"}';
+  test(
+    '✅ this is testing fetchRandomDog returns DogModel when API call is successful',
+    () async {
+      const fakeJson =
+          '{"message": "https://images.dog.ceo/breeds/hound.jpg", "status": "success"}';
 
-    when(
-      () => mockHttpClient.get(Uri.parse(apiServices.baseUrl)),
-    ).thenAnswer((_) async => http.Response(fakeJson, 200));
+      when(
+        () => mockHttpClient.get(Uri.parse(apiServices.baseUrl)),
+      ).thenAnswer((_) async => http.Response(fakeJson, 200));
 
-    // Call the function
-    final result = await apiServices.fetchRandomDog();
+      // Call the function
+      final result = await apiServices.fetchRandomDog();
 
-    // Check the result
-    expect(result, isA<DogModel>());
-    expect(result.message, contains("dog.ceo"));
-    expect(result.status, "success");
-  });
+      // Check the result
+      expect(result, isA<DogModel>());
+      expect(result.message, contains("dog.ceo"));
+      expect(result.status, "success");
+    },
+  );
 
   test('❌ fetchRandomDog throws Exception when API call fails', () async {
     // Fake API error

@@ -1,0 +1,30 @@
+name: Flutter Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout code from repo
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Install Flutter
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.19.0"   # <-- change to your Flutter version
+
+      # Get dependencies
+      - name: Install dependencies
+        run: flutter pub get
+
+      # Run tests
+      - name: Run unit tests
+        run: flutter test
