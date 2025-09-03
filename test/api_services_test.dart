@@ -36,12 +36,10 @@ void main() {
   );
 
   test('❌ fetchRandomDog throws Exception when API call fails', () async {
-    // Fake API error
     when(
       () => mockHttpClient.get(Uri.parse(apiServices.baseUrl)),
     ).thenAnswer((_) async => http.Response("Error", 404));
 
-    // Check that an exception is thrown
     expect(() async => await apiServices.fetchRandomDog(), throwsException);
   });
 }
